@@ -1,6 +1,7 @@
 import './globals.css'
 import { Mulish } from 'next/font/google'
-import { Navbar } from '@/components'
+import { Navbar } from '@/components';
+import AuthProvider from './AuthProvider';
 
 const defaultFont = Mulish({ subsets: ['latin'] })
 
@@ -17,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={defaultFont.className}>
-        <Navbar />
-        {children}
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </body>
     </html>

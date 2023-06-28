@@ -1,25 +1,20 @@
 import { auth } from "..";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-async function signIn(email: string, password: string) {
-  let error;
-  const result = await createUserWithEmailAndPassword(auth, email, password).catch((err) => {
-    error = err;
-  });
-
-  if (error) {
-    return {
-      isOk: false,
-      errorMessage: error,
-    };
-  } else {
-    return {
-      isOk: true,
-      data: result
-    }
-  }
+interface signInProps {
+  email: string;
+  password: string;
 }
 
-export {
-  signIn
+export async function signIn({ email, password }: signInProps) {
+  let result, error;
+
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    result = res;
+  } catch (err) {
+    error = err;
+  };
+
+  return { result, error }
 }
