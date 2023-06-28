@@ -1,7 +1,8 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Mulish } from 'next/font/google'
+import { Navbar } from '@/components'
 
-const inter = Inter({ subsets: ['latin'] })
+const defaultFont = Mulish({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={defaultFont.className}>
+        <Navbar />
+        {children}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      </body>
     </html>
   )
 }
