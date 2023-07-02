@@ -2,45 +2,56 @@
 import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/app/AuthProvider';
-import { Button } from '@mui/base';
-import { logOut } from '@/firebase/auth/signIn';
+
+const links: { url: string, title: string }[] = [
+  {
+    url: '/saved',
+    title: 'Bookmarks',
+  },
+  {
+    url: '/jobs',
+    title: 'Jobs',
+  },
+  {
+    url: '/companies',
+    title: 'Companies',
+  },
+]
 
 export default function Navbar() {
-  const user = useAuth();
+  const { user, account } = useAuth();
 
   return (
-    <nav className='bg-customBlue-900 px-6 md:px-8 text-white'>
-      <div className='max-w-screen-xl h-[70px] mx-auto flex items-center justify-between'>
-        <h2 className='font-bold text-[22px]'>jobsinkosovo</h2>
-
-        {!user ? (
-          <Link href="/signin" className='bg-white text-customBlue-800 px-4 py-2 rounded-full font-medium'>Sign in</Link>
-        ) : (
-          <ul className='flex gap-4'>
-            <li>
-              <Button aria-label='Bookmarks' title='Bookmarks'>
-                <span className="material-symbols-outlined">bookmark</span>
-              </Button>
-            </li>
-            <li>
-              <Button aria-label='Messages' title='Messages'>
-                <span className="material-symbols-outlined">chat</span>
-              </Button>
-            </li>
-            <li>
-              <Link href="/" title='Profile'>
-                <span className="material-symbols-outlined">person</span>
-              </Link>
-            </li>
-            <li>
-              <Button aria-label='Log out' title='Log out' onClick={logOut}>
-                <span className="material-symbols-outlined">logout</span>
-              </Button>
-            </li>
-          </ul>
-        )}
-
+    <nav className='h-[69px] flex items-center justify-between px-8 border-solid border-b-[1px] border-b-neutral-200'>
+      <div className='flex items-center gap-6'>
+        <h2 className="font-bold text-[22px] flex items-center gap-1">
+          <span className="material-symbols-outlined text-orange-600">bolt</span>
+          <span className='text-neutral-800'>jobfinder</span>
+        </h2>
+        <ul className='flex gap-6'>
+          {links.map((link) => (
+            <NavLink key={link.title} {...link} />
+          ))}
+        </ul>
+      </div>
+      <div className='flex gap-2 items-center'>
+        <Link href="/" title='View Profile' className='border-solid border-[1px] border-orange-500 bg-orange-500 text-white px-4 py-[6px] rounded-full font-medium transition-all hover:bg-white hover:text-orange-500'>
+          Lindrit Sulaj
+        </Link>
+        <button title='Log out' className='rounded-full border-solid border-[1px] border-neutral-300 w-10 h-10 flex items-center justify-center'>
+          <span className="material-symbols-outlined">logout</span>
+        </button>
       </div>
     </nav>
+  )
+}
+
+function NavLink({ url, title }: { url: string; title: string }): React.JSX.Element {
+  return (
+    <li>
+      <Link aria-label={title} href={url} className='text-[15.5px]'>
+        {title}
+      </Link>
+    </li>
   )
 }

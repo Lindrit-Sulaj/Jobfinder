@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import SignIn from "./SignIn";
 import Login from "./Login";
 import Hero from "./Hero";
+import CreateAccount from "./CreateAccount";
 
 export {
   Button,
@@ -14,5 +15,6 @@ export {
   Navbar,
   SignIn,
   Login,
-  Hero
+  Hero,
+  CreateAccount
 }

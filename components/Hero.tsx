@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { Input, Button } from '@mui/base'
+import Link from 'next/link'
 
 export default function Hero() {
   return (

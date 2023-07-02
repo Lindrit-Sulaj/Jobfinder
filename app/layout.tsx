@@ -1,9 +1,9 @@
 import './globals.css'
-import { Mulish } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { Navbar } from '@/components';
 import AuthProvider from './AuthProvider';
 
-const defaultFont = Mulish({ subsets: ['latin'] })
+const defaultFont = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={defaultFont.className}>
+      <body className={`${defaultFont.className}`}>
         <AuthProvider>
           <Navbar />
           {children}
