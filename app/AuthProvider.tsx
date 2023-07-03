@@ -5,11 +5,10 @@ import { auth } from "@/firebase";
 import { User } from "firebase/auth";
 
 const AuthContext = createContext<any>({});
-export const useAuth = (): { user: User, account: any } => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | any>(null);
-  const [account, setAccount] = useState<any>(null)
+  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, account }}>
+    <AuthContext.Provider value={ user }>
       {!loading ? children : <div>Loading...</div>}
     </AuthContext.Provider>
   )

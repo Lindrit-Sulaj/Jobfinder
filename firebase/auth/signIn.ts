@@ -1,5 +1,5 @@
 import { auth } from "..";
-import { createUserWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 
 interface signInProps {
   email: string;
@@ -21,7 +21,20 @@ export async function signIn({ email, password }: signInProps) {
   return { result, error }
 }
 
-export async function logOut() {
+export async function logIn({ email, password }: signInProps) {
+  let result, error;
+
+  try {
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    result = res;
+  } catch (err) {
+    error = err;
+  };
+
+  return { result, error }
+}
+
+export async function logOut(): Promise<{ result: any, error: any }> {
   let result, error;
 
   try {
