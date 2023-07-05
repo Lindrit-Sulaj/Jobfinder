@@ -7,12 +7,8 @@ import { logOut } from '@/firebase/auth/signIn';
 
 const links: { url: string, title: string }[] = [
   {
-    url: '/saved',
+    url: '/saves',
     title: 'Bookmarks',
-  },
-  {
-    url: '/jobs',
-    title: 'Jobs',
   },
   {
     url: '/companies',
