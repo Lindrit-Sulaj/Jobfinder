@@ -54,8 +54,6 @@ export default function SignIn({ isOpened, setIsOpened }: { isOpened: boolean, s
       setIsOpened(false);
       console.log(result);
     }
-
-
   }
 
   return (

@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       colors: {
         neutral: {
-          '850': 'rgb(30, 30, 30)'
+          '850': 'rgb(30, 30, 30)',
+          '80': '#e6f3ef'
         }
       }
     },

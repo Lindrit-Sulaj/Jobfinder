@@ -2,9 +2,9 @@
 import { Button, Input, Select, Switch, Snackbar } from "@mui/base";
 import Navbar from "./Navbar";
 import Login from "./Login";
-import Hero from "./Hero";
 import Dialog from "./Dialog";
 import SignIn from "./SignIn";
+import Search from "./Search";
 
 export {
   Button,
@@ -14,7 +14,7 @@ export {
   Snackbar,
   Navbar,
   Login,
-  Hero,
   Dialog,
-  SignIn
+  SignIn,
+  Search
 }
