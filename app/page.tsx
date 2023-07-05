@@ -2,11 +2,12 @@ import React from 'react'
 import { Search } from '@/components'
 
 async function getJobs() {
-  const res = await fetch('http://localhost:3000/api/jobs', { cache: 'no-store' });
+  const res = await fetch('http://localhost:3000/api/jobs');
   if (!res.ok) {
     throw new Error("Couldn't fetch")
   }
-  return res.json();
+  const data = await res.json();
+  return data;
 }
 
 export default async function Home() {
@@ -21,4 +22,4 @@ export default async function Home() {
   )
 }
 
-// export const revalidate = 3600;
+export const revalidate = 900;

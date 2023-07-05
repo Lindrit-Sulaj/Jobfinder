@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { collection, getDocs, query, limit, orderBy } from "firebase/firestore"
+import { collection, getDocs, query, limit, orderBy, where, or } from "firebase/firestore"
 
 import { db } from "@/firebase"
 
@@ -24,8 +24,31 @@ interface Job {
 
 export async function GET(request: any) {
   let documents: Partial<Job>[] = [];
-  const q = query(collection(db, 'jobs'), orderBy("postedAt"), limit(50));
+  let queryConstraints = [];
+  const { searchParams } = new URL(request.url);
+  
+  const params: { [key: string]: string | null } = {
+    query: searchParams.get('query'),
+    location: searchParams.get('location'),
+    salary: searchParams.get('salary'),
+  }
+
+  for (let key in params) {
+    if (params[key] == null) continue;
+
+    if (key === 'query') {
+      queryConstraints.push(or(where("title", "==", params[key]), where("keywords", "array-contains", params[key])));
+    } else if (key === "location") {
+      queryConstraints.push(where("location", '==', params[key]));
+    } else if (key === "salary") {
+      queryConstraints.push(where('salary', '<=', Number(params[key])));
+    }
+  }
+  
+  //@ts-ignore
+  const q = query(collection(db, 'jobs'), orderBy("postedAt"), ...queryConstraints, limit(50));
   const res = await getDocs(q);
+  
   res.docs.map((document) => {
     documents.push({ ...document.data(), id: document.id });
   })
