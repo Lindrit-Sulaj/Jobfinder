@@ -1,7 +1,7 @@
 import { collection, getDocs, query, limit, orderBy, where, or } from "firebase/firestore"
 import { db } from "@/firebase"
 
-interface Job {
+export interface Job {
   title: string;
   id: string;
   keywords: string[];
@@ -26,7 +26,7 @@ interface JobParams {
   salary?: string | null;
 }
 
-export async function getJobs(params: JobParams) {
+export async function getJobs(params?: JobParams) {
   let documents: Partial<Job>[] = [];
   let queryConstraints = [];
 

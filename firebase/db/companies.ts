@@ -1,6 +1,5 @@
 import { db } from "@/firebase";
 import { getDocs, collection, query, limit } from "firebase/firestore";
-import { NextResponse } from "next/server";
 
 interface Company {
   name: string;
@@ -16,12 +15,12 @@ interface Company {
   link?: string;
 }
 
-export async function GET() {
-  const documents: any[] = [];
+export async function getCompanies() {
+  const documents: Partial<Company>[] = [];
   const q = query(collection(db, 'companies'), limit(50));
   const res = await getDocs(q);
   res.docs.map(document => {
     documents.push({ ...document.data(), id: document.id })
   })
-  return NextResponse.json(documents);
+  return documents;
 }

@@ -5,6 +5,7 @@ import Login from "./Login";
 import Dialog from "./Dialog";
 import SignIn from "./SignIn";
 import Search from "./Search";
+import Job from "./Job";
 
 export {
   Button,
@@ -16,5 +17,6 @@ export {
   Login,
   Dialog,
   SignIn,
-  Search
+  Search,
+  Job
 }
