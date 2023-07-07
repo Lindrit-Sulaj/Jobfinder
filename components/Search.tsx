@@ -36,16 +36,14 @@ export default function Search() {
   }
 
   return (
-    <form className='max-w-screen-xl mx-auto mt-8 flex gap-4' onSubmit={handleSubmit}>
-      <div className='w-1/2 bg-neutral-50 border-solid border-[1px] border-neutral-200 rounded-full py-4 px-3 flex'>
-        <span className='w-20 text-center'>What</span>
-        <input value={query} onChange={(e) => setQuery(e.target.value)} className='grow bg-transparent outline-none' type="text" placeholder='Job title, keywords, or company' />
+    <form className='flex grow text-black' onSubmit={handleSubmit}>
+      <div className='w-full bg-white max-w-[300px] px-3 py-2 flex items-center gap-2 border-solid border-[1px] border-neutral-100 rounded-l-md'>
+        <input value={query} onChange={(e) => setQuery(e.target.value)} className='grow bg-transparent outline-none w-full' type="text" placeholder='Job title, keywords, or company' />
       </div>
-      <div className='w-1/2 bg-neutral-50 border-solid border-[1px] border-neutral-200 rounded-full py-4 px-3 flex'>
-        <span className='w-20 text-center'>Where</span>
-        <input value={location} onChange={(e) => setLocation(e.target.value)} className='grow bg-transparent outline-none' type="text" placeholder={`Country, state or "remote"`}/>
+      <div className='w-full bg-white max-w-[250px] px-3 py-2 flex items-center gap-2 border-solid border-[1px] border-neutral-100'>
+        <input value={location} onChange={(e) => setLocation(e.target.value)} className='grow bg-transparent outline-none w-full' type="text" placeholder={`Country, state or "remote"`}/>
       </div>
-      <button className='bg-black text-white py-4 flex items-center justify-center w-10'>
+      <button className='bg-marian-blue hover:bg-federal-hover transition-all text-white flex items-center justify-center w-12 rounded-r-md'>
         <span className="material-symbols-outlined">search</span>
       </button>
     </form>

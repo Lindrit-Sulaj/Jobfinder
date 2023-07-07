@@ -14,6 +14,7 @@ module.exports = {
         },
         'dark-purple': '#0D0221',
         'federal-blue': '#0F084B',
+        'federal-hover': '#140B66',
         'marian-blue': '#26408B',
         'light-blue': '#A6CFD5',
         'mint-green': '#C2E7D9'
