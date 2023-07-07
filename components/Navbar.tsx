@@ -32,11 +32,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className='h-[69px] flex items-center justify-between px-8 border-solid border-b-[1px] border-b-neutral-200'>
+      <nav className='h-[70px] flex items-center justify-between px-8 bg-federal-blue text-white'>
         <div className='flex items-center gap-6'>
           <h2 className="font-bold text-[22px] flex items-center gap-1">
-            <span className="material-symbols-outlined text-blue-500">bolt</span>
-            <span className='text-neutral-800'>jobfinder</span>
+            <span className="material-symbols-outlined text-marian-blue">bolt</span>
+            <span>jobfinder</span>
           </h2>
           <ul className='flex gap-6'>
             {links.map((link) => (
@@ -46,10 +46,10 @@ export default function Navbar() {
         </div>
         {user ? (
           <div className='flex gap-2 items-center'>
-            <Link href="/" title='View Profile' className='border-solid border-[1px] border-blue-500 bg-blue-500 text-white px-4 py-[6px] rounded-full font-medium transition-all hover:bg-white hover:text-blue-500'>
+            <Link href="/" title='View Profile' className='bg-mint-green text-federal-blue px-4 py-[6px] rounded-full font-medium transition-all'>
               {user.displayName !== null ? user.displayName : user.email}
             </Link>
-            <button onClick={handleLogOut} title='Log out' className='rounded-full border-solid border-[1px] border-neutral-300 w-10 h-10 flex items-center justify-center'>
+            <button onClick={handleLogOut} title='Log out' className='rounded-full border-solid border-[2px] border-marian-blue w-10 h-10 flex items-center justify-center'>
               <span className="material-symbols-outlined">logout</span>
             </button>
           </div>
