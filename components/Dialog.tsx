@@ -11,7 +11,7 @@ interface Dialog {
 
 export function Backdrop({ children, isOpened, setIsOpened }: Dialog) {
   return (
-    <div onClick={() => isOpened && setIsOpened(false)} className={isOpened ? 'bg-[rgba(0,0,0,0.7)] fixed top-0 left-0 w-full h-screen flex justify-center items-center' : ''}>
+    <div onClick={() => isOpened && setIsOpened(false)} className={isOpened ? 'bg-[rgba(0,0,0,0.8)] fixed top-0 left-0 w-full h-screen flex justify-center items-center z-[100]' : ''}>
       {children}
     </div>
   )
