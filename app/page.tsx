@@ -6,8 +6,8 @@ export default async function Home() {
   const jobs = await getJobs();
 
   return (
-    <main className='px-6 md:px-8'>
-      <section className='grid grid-cols-3 max-w-screen-xl mx-auto gap-6 mt-8'>
+    <main className='px-6 md:px-8 py-6'>
+      <section className='grid grid-cols-3 max-w-screen-xl mx-auto gap-6'>
         {jobs.map(job => (
           <Job {...job} key={job.id}/>
         ))}

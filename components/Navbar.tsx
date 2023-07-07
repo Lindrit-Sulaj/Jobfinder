@@ -22,6 +22,7 @@ export default function Navbar() {
   const breakpoint = useMediaQuery();
   const user = useAuth();
   const [isOpened, setIsOpened] = useState(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false)
 
   async function handleLogOut() {
     const { result, error } = await logOut();
@@ -46,7 +47,7 @@ export default function Navbar() {
               { user ? <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">account_circle</span> : "Log in"}
               
             </button>
-            <button className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
+            <button onClick={() => setIsSearching(!isSearching)} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
               <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">search</span>
             </button>
             <button className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
@@ -85,7 +86,11 @@ export default function Navbar() {
         </nav>
       )}
 
-
+      {isSearching && ['sm', 'md', 'lg'].includes(breakpoint) && (
+        <div className='fixed top-[70px] w-full py-6 bg-federal-blue z-50 px-8'>
+          <Search />
+        </div>
+      )}
       <SignIn isOpened={isOpened} setIsOpened={setIsOpened} />
     </>
   )
