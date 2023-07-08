@@ -38,20 +38,20 @@ export default function Navbar() {
   return (
     <>
       {breakpoint === "sm" || breakpoint === "md" || breakpoint === "lg" ? (
-        <nav className='h-[70px] fixed top-0 w-full z-50 bg-federal-blue text-white px-6 flex items-center justify-between'>
+        <nav className='h-[70px] fixed top-0 w-full z-50 bg-federal-blue text-white px-3 flex items-center justify-between'>
           <h2 className="font-bold text-[20px] flex items-center gap-1">
             <span className="material-symbols-outlined text-marian-blue">bolt</span>
             <span>jobfinder</span>
           </h2>
-          <div className="flex gap-1">
+          <div className="flex gap-0">
             <button onClick={() => !user && setIsOpened(true)} className={`${user ? "w-10 h-10" : "px-3 py-1 w-auto"} transition-all flex items-center justify-center rounded-md hover:bg-federal-hover`}>
               {user ? <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">account_circle</span> : "Log in"}
 
             </button>
-            <button onClick={() => setIsSearching(!isSearching)} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
+            <button onClick={() => { setIsSearching(!isSearching); setMenuOpened(false) }} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
               <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">search</span>
             </button>
-            <button onClick={() => setMenuOpened(!menuOpened)} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
+            <button onClick={() => { setMenuOpened(!menuOpened); setIsSearching(false)}} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
               <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">menu</span>
             </button>
           </div>
@@ -102,7 +102,7 @@ export default function Navbar() {
 
 function MobileMenu({ user, handleLogOut }: any) {
   return (
-    <div className='bg-federal-blue w-full fixed top-[70px] py-5 text-white z-50'>
+    <div className='bg-federal-blue w-full fixed top-[70px] pt-5 pb-7 text-white z-50'>
       <ul className='flex flex-col items-center gap-y-6'>
         {links.map(link => (
           <NavLink key={link.title} {...link} />
