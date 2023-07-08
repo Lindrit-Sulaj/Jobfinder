@@ -22,7 +22,8 @@ export default function Navbar() {
   const breakpoint = useMediaQuery();
   const user = useAuth();
   const [isOpened, setIsOpened] = useState(false);
-  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [menuOpened, setMenuOpened] = useState<boolean>(true);
 
   async function handleLogOut() {
     const { result, error } = await logOut();
@@ -44,13 +45,13 @@ export default function Navbar() {
           </h2>
           <div className="flex gap-1">
             <button onClick={() => !user && setIsOpened(true)} className={`${user ? "w-10 h-10" : "px-3 py-1 w-auto"} transition-all flex items-center justify-center rounded-md hover:bg-federal-hover`}>
-              { user ? <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">account_circle</span> : "Log in"}
-              
+              {user ? <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">account_circle</span> : "Log in"}
+
             </button>
             <button onClick={() => setIsSearching(!isSearching)} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
               <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">search</span>
             </button>
-            <button className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
+            <button onClick={() => setMenuOpened(!menuOpened)} className='w-10 h-10 transition-all flex items-center justify-center rounded-md hover:bg-federal-hover'>
               <span className="material-symbols-outlined text-light-blue transition-all hover:text-white">menu</span>
             </button>
           </div>
@@ -86,6 +87,9 @@ export default function Navbar() {
         </nav>
       )}
 
+      {menuOpened && ['sm', 'md', 'lg'].includes(breakpoint) && (
+        <MobileMenu user={user} handleLogOut={handleLogOut} />
+      )}
       {isSearching && ['sm', 'md', 'lg'].includes(breakpoint) && (
         <div className='fixed top-[70px] w-full py-6 bg-federal-blue z-50 px-8'>
           <Search />
@@ -96,10 +100,36 @@ export default function Navbar() {
   )
 }
 
+function MobileMenu({ user, handleLogOut }: any) {
+  return (
+    <div className='bg-federal-blue w-full fixed top-[70px] py-5 text-white z-50'>
+      <ul className='flex flex-col items-center gap-y-6'>
+        {links.map(link => (
+          <NavLink key={link.title} {...link} />
+        ))}
+        {user && (
+          <>
+            <li>
+              <Link href="/" title='View Profile' className='bg-mint-green text-federal-blue px-4 py-[8px] rounded-md font-medium transition-all'>
+                {user.displayName !== null ? user.displayName : user.email}
+              </Link>
+            </li>
+            <li>
+              <button onClick={handleLogOut} title='Log out' className='rounded-md px-4 py-[6px] border-solid border-[1px] border-marian-blue flex items-center justify-center transition-all hover:bg-marian-blue'>
+                Log out
+              </button>
+            </li>
+          </>
+        )}
+      </ul>
+    </div>
+  )
+}
+
 function NavLink({ url, title }: { url: string; title: string }): React.JSX.Element {
   return (
     <li>
-      <Link aria-label={title} href={url} className='px-3 py-2 rounded-md transition-all hover:bg-federal-hover'>
+      <Link aria-label={title} href={url} className='px-3 py-2 text-[17px] lg:text-base rounded-md transition-all hover:bg-federal-hover'>
         {title}
       </Link>
     </li>
